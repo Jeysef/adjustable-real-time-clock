@@ -1,17 +1,17 @@
 /**
-  *****************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  *****************************************************************************
-  * @attention
-  *
-  *  Benchmark code based on:
-  *    OLED SSD1306 library for STM32
-  *    https://github.com/lamik/OLED_SSD1306_STM32_HAL
-  *    Mateusz Salamon <mateusz@msalamon.pl>
-  *
-  *****************************************************************************
-  */
+ *****************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ *****************************************************************************
+ * @attention
+ *
+ *  Benchmark code based on:
+ *    OLED SSD1306 library for STM32
+ *    https://github.com/lamik/OLED_SSD1306_STM32_HAL
+ *    Mateusz Salamon <mateusz@msalamon.pl>
+ *
+ *****************************************************************************
+ */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
@@ -61,8 +61,8 @@ int main(void)
   // SSD1306_Bitmap((uint8_t*)picture);
   // delay_ms(2000);
 
-  // GFX_SetFont(font_6x4);
-  // GFX_SetFontSize(1);
+  GFX_SetFont(font_6x4);
+  GFX_SetFontSize(4);
 
   /* SSD1306_StartScrollLeftUp(0, 7, SCROLL_EVERY_4_FRAMES, 1);
    * SSD1306_StartScrollLeft(0, 7, SCROLL_EVERY_4_FRAMES);
@@ -74,7 +74,7 @@ int main(void)
   for(;;) {
 
     SSD1306_Clear(WHITE);
-    // GFX_DrawString(0, 0, "HELLO", WHITE, BLACK);
+    GFX_DrawString(0, 0, "HELLO", BLACK, WHITE);
 
     GPIO_WriteHigh(TEST_Port, TEST_Pin);
     SSD1306_Display();

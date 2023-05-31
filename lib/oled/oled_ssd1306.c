@@ -329,7 +329,7 @@ void SSD1306_Init(void)
   /* Horizontal Addressing Mode */
   SSD1306_Command(0x00);
 
-  SSD1306_SetContrast(0xFF);
+  SSD1306_SetContrast(0x8F);
   SSD1306_RotateDisplay(1);
 
   /* Set Normal Display */
@@ -337,20 +337,25 @@ void SSD1306_Init(void)
   /* Select Multiplex Ratio */
   SSD1306_Command(SSD1306_SETMULTIPLEX);
   /* Default => 0x3F (1/64 Duty)	0x1F(1/32 Duty) */
-  SSD1306_Command(0x3F);
+  // SSD1306_Command(0x1F);
+  SSD1306_Command(SSD1306_LCDHEIGHT - 1);
   /* Setting Display Offset */
   SSD1306_Command(SSD1306_SETDISPLAYOFFSET);
   SSD1306_Command(0x00);  /* 00H Reset */
+  SSD1306_Command(SSD1306_SETSTARTLINE);
   /* Set Display Clock */
   SSD1306_Command(SSD1306_SETDISPLAYCLOCKDIV);
   SSD1306_Command(0x80);  /* 105HZ */
   /* Set Pre-Charge period */
   SSD1306_Command(SSD1306_SETPRECHARGE);
   SSD1306_Command(0x22);
+  SSD1306_Command(SSD1306_COMSCANDEC);
+
 
   /* Set COM Hardware Configuration */
   SSD1306_Command(SSD1306_SETCOMPINS);
-  SSD1306_Command(0x12);
+  // SSD1306_Command(0x12);
+  SSD1306_Command(0x02);
               /* Alternative COM Pin---See IC Spec page 34       */
               /* (0x02)=> A4=0;Sequential COM pin configuration; */
               /*          A5=0;Disable COM Left/Right remap      */
