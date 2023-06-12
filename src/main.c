@@ -39,9 +39,9 @@
 
 /* Main function -------------------------------------------------------------*/
 /**
-  * @brief  The application entry point
-  * @retval int - don't care
-  */
+ * @brief  The application entry point
+ * @retval int - don't care
+ */
 int main(void)
 {
   /* STM8 configuration */
@@ -61,7 +61,7 @@ int main(void)
   // SSD1306_Bitmap((uint8_t*)picture);
   // delay_ms(2000);
 
-  GFX_SetFont(font_6x4);
+  GFX_SetFont(font_7x5);
   GFX_SetFontSize(4);
 
   /* SSD1306_StartScrollLeftUp(0, 7, SCROLL_EVERY_4_FRAMES, 1);
@@ -71,10 +71,9 @@ int main(void)
    */
 
   /* Infinite loop */
-  for(;;) {
-
-    SSD1306_Clear(WHITE);
-    GFX_DrawString(0, 0, "HELLO", BLACK, WHITE);
+  for (;;) {
+    SSD1306_Clear(BLACK);
+    GFX_DrawString(2, 2, "HELLO", WHITE, BLACK);
 
     GPIO_WriteHigh(TEST_Port, TEST_Pin);
     SSD1306_Display();
