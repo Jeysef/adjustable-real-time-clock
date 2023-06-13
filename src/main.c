@@ -29,7 +29,7 @@
 #include "fonts.h"
 #include "picture.h"
 
-
+#include "DS1302.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -47,6 +47,21 @@ int main(void)
   /* STM8 configuration */
   MCU_Config();
   init_ms();
+  DS1302_Init();
+
+  // set time to Tu 08:09 13.06.23
+  // 1 - year
+  // 2 - month
+  // 3 - date
+  // 4 - hour
+  // 5 - min
+  // 6 - sec
+  // 7 - day
+  // uint8_t buf[7] = {00, 23, 06, 13, 08, 09, 02};
+  // convert to hex
+  
+  uint8_t buf[7] = {0x00, 0x17, 0x06, 0xD, 0x14, 0x24, 0x02};
+  DS1302_WriteTime(buf);
 
   /* SSD1306 configuration */
 #ifdef SSD1306_I2C_CONTROL
@@ -58,22 +73,26 @@ int main(void)
 
   /* SSD1306 demo code */
 
-  // SSD1306_Bitmap((uint8_t*)picture);
+  // SSD1306_Bitmap((uint8_t *)picture);
   // delay_ms(2000);
 
   GFX_SetFont(font_7x5);
-  GFX_SetFontSize(4);
-
-  /* SSD1306_StartScrollLeftUp(0, 7, SCROLL_EVERY_4_FRAMES, 1);
-   * SSD1306_StartScrollLeft(0, 7, SCROLL_EVERY_4_FRAMES);
-   * SSD1306_StartBlinking(1);
-   * SSD1306_ZoomIn(1);
-   */
+  GFX_SetFontSize(3);
 
   /* Infinite loop */
-  for (;;) {
+  for (;;)
+  {
     SSD1306_Clear(BLACK);
-    GFX_DrawString(2, 2, "HELLO", WHITE, BLACK);
+
+    uint8_t buf[7];
+    DS1302_ReadTime(buf);
+    char str[20];
+    // draw date
+    sprintf(str, "%02d.%02d.%02d", buf[3], buf[2], buf[1]);
+    GFX_DrawString(4, 2, str, WHITE, BLACK);
+    // draw time
+    sprintf(str, "%02d:%02d:%02d", buf[4], buf[5], buf[6]);
+    GFX_DrawString(4, 20, str, WHITE, BLACK);
 
     GPIO_WriteHigh(TEST_Port, TEST_Pin);
     SSD1306_Display();
@@ -96,6 +115,8 @@ void assert_failed(uint8_t *file, uint32_t line)
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
   /* Infinite loop */
+  file = file;
+  line = line;
   while (1)
   {
   }

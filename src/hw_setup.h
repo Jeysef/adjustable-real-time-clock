@@ -37,7 +37,7 @@
   *          refreshed..
   */
 #define TEST_Pin                GPIO_PIN_5
-#define TEST_Port               GPIOD
+#define TEST_Port               GPIOC
 
 /**
   *  @brief  Display module connections
