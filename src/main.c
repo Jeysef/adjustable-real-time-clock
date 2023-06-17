@@ -59,9 +59,9 @@ int main(void)
   // 7 - day
   // uint8_t buf[7] = {00, 23, 06, 13, 08, 09, 02};
   // convert to hex
-  
-  uint8_t buf[7] = {0x00, 0x17, 0x06, 0xD, 0x15, 0xB, 0x02};
-  DS1302_WriteTime(buf);
+
+  // uint8_t buf[7] = {0x00, 0x17, 0x06, 0xD, 0x15, 0xB, 0x02};
+  // DS1302_WriteTime(buf);
 
   /* SSD1306 configuration */
 #ifdef SSD1306_I2C_CONTROL
