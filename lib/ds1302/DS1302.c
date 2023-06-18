@@ -266,6 +266,22 @@ void DS1302_Init(void)
     init_ms();
 }
 
+void DS1302_No_Reset_Init(void) {
+	GPIO_Init(DS1302_GPIO, DS1302_SCLK, GPIO_MODE_OUT_PP_HIGH_FAST);
+    GPIO_Init(DS1302_GPIO, DS1302_SDA, GPIO_MODE_OUT_PP_HIGH_FAST);
+    GPIO_Init(DS1302_GPIO, DS1302_RST, GPIO_MODE_OUT_PP_LOW_FAST);
+	
+	DS1302_WriteByte(DS1302_CHARGER,0x00);			// Disable Trickle Charger 
+		
+//	DS1302_RST = 0;
+    GPIO_WriteLow(DS1302_GPIO, DS1302_RST);
+//	DS1302_SCK = 0;
+    GPIO_WriteLow(DS1302_GPIO, DS1302_SCLK);
+
+
+    init_ms();
+}
+
 /* Writes 'val' to ram address 'addr' */
 /* Ram addresses range from 0 to 30 */
 void DS1302_WriteRam(uint8_t addr, uint8_t val) {

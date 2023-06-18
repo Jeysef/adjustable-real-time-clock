@@ -32,6 +32,8 @@
 #include "DS1302.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+// #define WRITE_TIME TRUE
+#define WRITE_TIME FALSE
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -47,7 +49,6 @@ int main(void)
   /* STM8 configuration */
   MCU_Config();
   init_ms();
-  DS1302_Init();
 
   // set time to Tu 08:09 13.06.23
   // 1 - year
@@ -59,9 +60,12 @@ int main(void)
   // 7 - day
   // uint8_t buf[7] = {00, 23, 06, 13, 08, 09, 02};
   // convert to hex
-
-  // uint8_t buf[7] = {0x00, 0x17, 0x06, 0xD, 0x15, 0xB, 0x02};
-  // DS1302_WriteTime(buf);
+  
+  if (WRITE_TIME) {
+  DS1302_Init();
+  uint8_t buf[7] = {0x07, 0x17, 0x06, 0x12, 0xB, 0xE, 0x00};
+  DS1302_WriteTime(buf);
+  } else {DS1302_No_Reset_Init();}
 
   /* SSD1306 configuration */
 #ifdef SSD1306_I2C_CONTROL
