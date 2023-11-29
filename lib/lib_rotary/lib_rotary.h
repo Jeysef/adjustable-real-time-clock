@@ -29,3 +29,8 @@ char alps_value(void);
  *  Poll switch (recommended: 1 to 4 milliseconds
  */
 void alps_poll(void);
+
+/*
+ *  Set current position (relative from setup)
+ */
+void alps_set_value(char value);

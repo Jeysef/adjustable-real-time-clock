@@ -22,11 +22,11 @@
 #include "stm8s_gpio.h"
 #include "lib_rotary.h"
 
-#define PIN_MASK (GPIO_PIN_1 | GPIO_PIN_2)
+#define PIN_MASK (GPIO_PIN_3 | GPIO_PIN_4)
 
 #define PORT (GPIOB)
-#define PIN_1 (GPIO_PIN_3)
-#define PIN_2 (GPIO_PIN_4)
+#define PIN_1 (GPIO_PIN_4)
+#define PIN_2 (GPIO_PIN_3)
 
 static char val_cur;
 static char val_max;
@@ -99,8 +99,13 @@ void alps_poll(void)
 	}
 	diff = pins_cur ^ pins_last;
 	direction = 0;		/* counter-clockwise */
-	if (diff == GPIO_PIN_2)		/* pin B changed */
+	if (diff == PIN_2)		/* pin B changed */
 	    direction = 1;	/* clockwise */
+}
+
+void alps_set_value(char value)
+{
+	val_cur = value;
 }
 
 /******************************************************************************
