@@ -10,6 +10,7 @@
             "includePath": [
                 "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/include",
                 "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/src",
+                "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/lib/lib_rotary",
                 "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/lib/oled",
                 "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/lib/ds1302",
                 "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/lib/delay",
@@ -22,6 +23,7 @@
                 "path": [
                     "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/include",
                     "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/src",
+                    "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/lib/lib_rotary",
                     "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/lib/oled",
                     "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/lib/ds1302",
                     "C:/Users/josim/OneDrive/Dokumenty/PlatformIO/Projects/zaverecnyProjekt2/lib/delay",
@@ -32,7 +34,7 @@
             },
             "defines": [
                 "F_CPU=16000000L",
-                "PLATFORMIO=60107",
+                "PLATFORMIO=60111",
                 "STM8S_NUCLEO_208RB",
                 "STM8S208",
                 "USE_STDPERIPH_DRIVER",

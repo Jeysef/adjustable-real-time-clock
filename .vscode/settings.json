@@ -6,6 +6,8 @@
         "delay.h": "c",
         "stm8s.h": "c",
         "ds400rom.h": "c",
-        "ds1302.h": "c"
+        "ds1302.h": "c",
+        "rotationencoder.h": "c",
+        "lib_rotary.h": "c"
     }
 }

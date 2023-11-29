@@ -7,6 +7,8 @@
 /* GPIO and DWT */
 void DS1302_Init(void);
 
+void DS1302_No_Reset_Init(void);
+
 /* Reads time byte by byte to 'buf' */
 void DS1302_ReadTime(uint8_t *buf);
 
