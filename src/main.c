@@ -40,6 +40,7 @@
 /* Private function prototypes -----------------------------------------------*/
 bool read_btn(void);
 uint8_t get_current_changing_position(uint8_t changing_time);
+uint8_t get_alps_steps(uint8_t index, uint8_t month);
 /* Privete functions ---------------------------------------------------------*/
 bool read_btn(void)
 {
@@ -64,6 +65,54 @@ uint8_t get_current_changing_position(uint8_t changing_time)
     }
   }
   return currentChangingTime;
+}
+uint8_t get_alps_steps(uint8_t index, uint8_t month)
+{
+
+  // month starts from 1
+
+  // 0 - date
+  // 1 - month
+  // 2 - year
+  // 3 - hour
+  // 4 - min
+  // 5 - sec
+
+  uint8_t steps = 0;
+  switch (index)
+  {
+  case 0:
+    if (month % 2 == 0)
+    {
+      steps = 31;
+    }
+    else
+    {
+      steps = 32;
+    }
+
+    break;
+  case 1:
+    steps = 13;
+    break;
+  case 2:
+    steps = 99;
+    break;
+  case 3:
+    steps = 24;
+    break;
+  case 4:
+    steps = 60;
+    break;
+  case 5:
+    steps = 60;
+    break;
+  }
+  if (index == 0 && month == 2)
+  {
+    steps = 29;
+  }
+  return steps;
 }
 /* Variables -----------------------------------------------------------------*/
 
@@ -96,14 +145,6 @@ int main(void)
   // convert to hex
   // uint8_t buf[7] = {0x07, 0x17, 0x06, 0x12, 0xB, 0x20, 0x00};
 
-  // 1 - date
-  // 2 - month
-  // 3 - year
-  // 4 - hour
-  // 5 - min
-  // 6 - sec
-  uint8_t alps_steps[6] = {30, 12, 99, 24, 60, 60};
-
   // uint8_t buf[7] = {0x07, 0x17, 0x06, 0x12, 0xB, 0x20, 0x00};
   DS1302_No_Reset_Init();
 
@@ -133,14 +174,11 @@ int main(void)
   /* Infinite loop */
   for (uint8_t i = 0;; i += 10)
   {
-    alps_poll();
-    
+
     SSD1306_Clear(BLACK);
 
     uint8_t buf[7];
     DS1302_ReadTime(buf);
-
-    alps_poll();
 
     if (read_btn())
     {
@@ -156,7 +194,7 @@ int main(void)
       }
 
       current_changing_position = get_current_changing_position(changing_time);
-      alps_init(alps_steps[current_changing_position], ALPS_ROLLOVER);
+      alps_init(get_alps_steps(current_changing_position, buf[2]), ALPS_ROLLOVER);
 
       buf_position = current_changing_position + 1;
       switch (current_changing_position)
@@ -173,8 +211,6 @@ int main(void)
       }
       alps_set_value(buf[buf_position]);
     }
-
-    alps_poll();
 
     if (changing_time != max_changing_time)
     {
@@ -194,8 +230,6 @@ int main(void)
     // draw time
     sprintf(str, "%02d:%02d:%02d", buf[4], buf[5], buf[6]);
     GFX_DrawString(4, 20, str, WHITE, BLACK);
-
-    alps_poll();
 
     if (i < 128)
     {

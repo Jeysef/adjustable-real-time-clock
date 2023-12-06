@@ -17,6 +17,7 @@
   *****************************************************************************/ 
 // #include "stm8s.h"
 #include "delay.h"
+#include "lib_rotary.h"
 // #include "stm8s_tim4.h"
 // #define TICK_PIN GPIOD,GPIO_PIN_5
 
@@ -40,6 +41,7 @@ INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 23)
 {
 	tick++;
 	TIM4_ClearITPendingBit(TIM4_IT_UPDATE);
+	alps_poll();
 	// GPIO_WriteReverse(TICK_PIN);            //toggle our systick pin (should be about 2kHz)
 }
 
